@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dine Out Invitation | 20th Sept, 7:30 PM</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .hero-bg {
+      background-image: linear-gradient(to bottom, rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.85)), 
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+</head>
+<body class="bg-slate-900 min-h-screen flex items-center justify-center p-3 sm:p-4 text-slate-800">
+
+  <div class="max-w-md w-full bg-white rounded-3xl shadow-2xl overflow-hidden my-4 border border-slate-100">
+    
+    <!-- Hero Banner with Restaurant Visuals -->
+    <div class="hero-bg p-6 text-white text-center relative flex flex-col justify-end min-h-[200px]">
+      <span class="inline-flex items-center space-x-1.5 self-center bg-amber-500/90 backdrop-blur-md text-white text-xs uppercase tracking-wider px-3.5 py-1 rounded-full font-bold shadow-lg mb-3">
+        <i class="fa-solid fa-utensils text-xs"></i>
+        <span>Dine Out Get-Together</span>
+      </span>
+      <h1 class="text-3xl font-black tracking-tight drop-shadow-md">Dinner Night Out</h1>
+      <p class="text-amber-200 text-sm mt-1 font-medium drop-shadow">Join us for delicious food & great conversations!</p>
+    </div>
+
+    <div class="p-5 sm:p-6 space-y-5">
+
+      <!-- Event Info Card (Date, Time, Location Link) -->
+      <div class="bg-amber-50/70 border border-amber-200/80 rounded-2xl p-4 space-y-3">
+        
+        <div class="grid grid-cols-2 gap-3 pb-1 border-b border-amber-200/60">
+          <!-- Date -->
+          <div class="flex items-center space-x-2.5">
+            <div class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold shadow-sm shrink-0">
+              <i class="fa-regular fa-calendar-days text-base"></i>
+            </div>
+            <div>
+              <div class="text-[10px] text-amber-800 font-extrabold uppercase tracking-wider">Date</div>
+              <div class="text-xs sm:text-sm font-bold text-slate-900">20th Sept</div>
+            </div>
+          </div>
+
+          <!-- Time -->
+          <div class="flex items-center space-x-2.5">
+            <div class="w-9 h-9 rounded-xl bg-orange-500 text-white flex items-center justify-center font-bold shadow-sm shrink-0">
+              <i class="fa-regular fa-clock text-base"></i>
+            </div>
+            <div>
+              <div class="text-[10px] text-amber-800 font-extrabold uppercase tracking-wider">Time</div>
+              <div class="text-xs sm:text-sm font-bold text-slate-900">7:30 PM</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Restaurant Link Button -->
+        <a href="https://share.google/LarJbjeWq5JaxC08T" target="_blank" rel="noopener noreferrer" 
+           class="flex items-center justify-between bg-white border border-amber-300 hover:border-amber-500 hover:bg-amber-50/30 text-amber-950 font-bold p-3 rounded-xl transition duration-200 group shadow-sm">
+          <div class="flex items-center space-x-2.5">
+            <i class="fa-solid fa-map-location-dot text-amber-600 text-lg group-hover:scale-110 transition"></i>
+            <span class="text-xs sm:text-sm">View Restaurant Details & Menu</span>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs text-amber-600"></i>
+        </a>
+      </div>
+
+      <!-- Form Section -->
+      <form id="rsvpForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+        
+        <!-- Name Input -->
+        <div>
+          <label for="userName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            Your Name <span class="text-rose-500">*</span>
+          </label>
+          <input type="text" id="userName" required placeholder="Enter your name" 
+                 class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition bg-slate-50 focus:bg-white text-slate-900 placeholder-slate-400 font-semibold text-sm">
+        </div>
+
+        <!-- Confirmation Options -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            Will you join us? <span class="text-rose-500">*</span>
+          </label>
+          <div class="grid grid-cols-2 gap-3">
+            <!-- Yes Button -->
+            <button type="button" id="btnYes" onclick="selectStatus('Yes')" 
+                    class="status-btn border-2 border-slate-200 rounded-xl py-2.5 px-3 flex items-center justify-center space-x-2 font-bold text-slate-600 hover:bg-emerald-50 transition text-xs sm:text-sm">
+              <i class="fa-solid fa-circle-check text-emerald-500 text-base"></i>
+              <span>Yes, I'm in! 🎉</span>
+            </button>
+
+            <!-- No Button -->
+            <button type="button" id="btnNo" onclick="selectStatus('No')" 
+                    class="status-btn border-2 border-slate-200 rounded-xl py-2.5 px-3 flex items-center justify-center space-x-2 font-bold text-slate-600 hover:bg-rose-50 transition text-xs sm:text-sm">
+              <i class="fa-solid fa-circle-xmark text-rose-500 text-base"></i>
+              <span>Can't make it 😢</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Host Selection Options -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            Send Confirmation To: <span class="text-rose-500">*</span>
+          </label>
+          <div class="grid grid-cols-3 gap-2">
+            
+            <label class="cursor-pointer">
+              <input type="radio" name="hostOption" value="both" checked class="peer hidden" onchange="updateHostSelection()">
+              <div class="peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-900 border-2 border-slate-200 rounded-xl py-2 px-2 text-center transition font-bold text-xs text-slate-600 flex flex-col items-center space-y-1">
+                <i class="fa-solid fa-users text-amber-600"></i>
+                <span>Both Hosts</span>
+              </div>
+            </label>
+
+            <label class="cursor-pointer">
+              <input type="radio" name="hostOption" value="shubhashish" class="peer hidden" onchange="updateHostSelection()">
+              <div class="peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-900 border-2 border-slate-200 rounded-xl py-2 px-2 text-center transition font-bold text-xs text-slate-600 flex flex-col items-center space-y-1">
+                <i class="fa-solid fa-user text-amber-600"></i>
+                <span>Shubhashish</span>
+              </div>
+            </label>
+
+            <label class="cursor-pointer">
+              <input type="radio" name="hostOption" value="shibaji" class="peer hidden" onchange="updateHostSelection()">
+              <div class="peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-900 border-2 border-slate-200 rounded-xl py-2 px-2 text-center transition font-bold text-xs text-slate-600 flex flex-col items-center space-y-1">
+                <i class="fa-solid fa-user text-amber-600"></i>
+                <span>Shibaji</span>
+              </div>
+            </label>
+
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" 
+                class="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-extrabold py-3.5 px-4 rounded-xl shadow-lg transition duration-200 active:scale-98 flex items-center justify-center space-x-2 text-sm mt-2">
+          <span>Confirm & Send via WhatsApp</span>
+          <i class="fa-brands fa-whatsapp text-lg"></i>
+        </button>
+
+      </form>
+
+      <!-- Action Modal for Host Messaging -->
+      <div id="contactModal" class="hidden fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 max-w-sm w-full space-y-4 text-center shadow-2xl border border-slate-100">
+          
+          <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl">
+            <i class="fa-brands fa-whatsapp"></i>
+          </div>
+          
+          <h3 class="text-lg font-black text-slate-900">Send WhatsApp Confirmation</h3>
+          <p class="text-xs text-slate-500 font-medium">Click the button below to send your response directly on WhatsApp:</p>
+          
+          <div class="space-y-2.5 pt-1">
+            <!-- Shubhashish Button -->
+            <a id="linkShubhashish" target="_blank" 
+               class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow transition flex items-center justify-center space-x-2 text-sm">
+              <i class="fa-brands fa-whatsapp text-lg"></i>
+              <span>Send to Shubhashish</span>
+            </a>
+            
+            <!-- Shibaji Button -->
+            <a id="linkShibaji" target="_blank" 
+               class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow transition flex items-center justify-center space-x-2 text-sm">
+              <i class="fa-brands fa-whatsapp text-lg"></i>
+              <span>Send to Shibaji</span>
+            </a>
+          </div>
+
+          <button onclick="closeModal()" class="text-xs font-bold text-slate-400 hover:text-slate-600 pt-2 block mx-auto">
+            Close Window
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    let selectedAttendance = null;
+    const phoneShubhashish = "917003637304";
+    const phoneShibaji = "919830058814";
+
+    function selectStatus(status) {
+      selectedAttendance = status;
+      const btnYes = document.getElementById('btnYes');
+      const btnNo = document.getElementById('btnNo');
+
+      if (status === 'Yes') {
+        btnYes.className = 'status-btn border-2 border-emerald-500 bg-emerald-50 rounded-xl py-2.5 px-3 flex items-center justify-center space-x-2 font-bold text-emerald-700 shadow-sm text-xs sm:text-sm';
+        btnNo.className = 'status-btn border-2 border-slate-200 rounded-xl py-2.5 px-3 flex items-center justify-center space-x-2 font-bold text-slate-600 hover:bg-rose-50 text-xs sm:text-sm';
+        
+        confetti({
+          particleCount: 70,
+          spread: 60,
+          origin: { y: 0.7 }
+        });
+      } else {
+        btnNo.className = 'status-btn border-2 border-rose-500 bg-rose-50 rounded-xl py-2.5 px-3 flex items-center justify-center space-x-2 font-bold text-rose-700 shadow-sm text-xs sm:text-sm';
+        btnYes.className = 'status-btn border-2 border-slate-200 rounded-xl py-2.5 px-3 flex items-center justify-center space-x-2 font-bold text-slate-600 hover:bg-emerald-50 text-xs sm:text-sm';
+      }
+    }
+
+    function updateHostSelection() {
+      // Helper function if needed on selection change
+    }
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById('userName').value.trim();
+      const selectedHostOption = document.querySelector('input[name="hostOption"]:checked').value;
+
+      if (!selectedAttendance) {
+        alert('Please select whether you are attending or not.');
+        return;
+      }
+
+      // Pre-filled WhatsApp message
+      const emoji = selectedAttendance === 'Yes' ? '🎉 YES, I am coming!' : '😢 NO, sorry I cannot make it.';
+      const message = `Hi! RSVP for Dine Out:%0A%0A👤 *Name:* ${encodeURIComponent(name)}%0A📍 *Confirmation:* ${selectedAttendance === 'Yes' ? 'ATTENDING' : 'NOT ATTENDING'} (${emoji})%0A📅 *Date:* 20th September%0A⏰ *Time:* 7:30 PM%0A🍽️ *Restaurant Link:* https://share.google/LarJbjeWq5JaxC08T`;
+
+      const urlShubhashish = `https://wa.me/${phoneShubhashish}?text=${message}`;
+      const urlShibaji = `https://wa.me/${phoneShibaji}?text=${message}`;
+
+      const linkShubhashishEl = document.getElementById('linkShubhashish');
+      const linkShibajiEl = document.getElementById('linkShibaji');
+
+      // Configure Modal buttons based on user host choice
+      if (selectedHostOption === 'both') {
+        linkShubhashishEl.style.display = 'flex';
+        linkShibajiEl.style.display = 'flex';
+        linkShubhashishEl.href = urlShubhashish;
+        linkShibajiEl.href = urlShibaji;
+        document.getElementById('contactModal').classList.remove('hidden');
+      } else if (selectedHostOption === 'shubhashish') {
+        window.open(urlShubhashish, '_blank');
+      } else if (selectedHostOption === 'shibaji') {
+        window.open(urlShibaji, '_blank');
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('contactModal').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
